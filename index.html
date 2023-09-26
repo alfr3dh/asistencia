@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generador de QR</title>
+    <!-- Incluye la biblioteca qrcode.js -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+</head>
+<body>
+    <h1>Generador de QR</h1>
+    
+    <!-- Contenedor donde se generará el QR para el primer enlace -->
+    <div id="qrcode1"></div>
+    <!-- Botón para generar el QR para el primer enlace -->
+    <button onclick="generarQR('qrcode1', 'https://www.roblox.com/home')">Generar QR 1</button>
+    
+    <!-- Contenedor donde se generará el QR para el segundo enlace -->
+    <div id="qrcode2"></div>
+    <!-- Botón para generar el QR para el segundo enlace -->
+    <button onclick="generarQR('qrcode2', 'https://youtu.be/OunUbxteSq0')">Generar QR 2</button>
+    
+    <script>
+        // Función para generar y mostrar un nuevo QR en el contenedor especificado con el enlace proporcionado
+        function generarQR(contenedorId, enlace) {
+            // Elimina el contenido del contenedor que contiene el QR anterior
+            document.getElementById(contenedorId).innerHTML = '';
+            
+            // Genera un enlace aleatorio único
+            var enlaceAleatorio = enlace + '/' + generarEnlaceAleatorio();
+            
+            // Genera y muestra el nuevo QR en el contenedor especificado
+            var qrcode = new QRCode(document.getElementById(contenedorId), {
+                text: enlaceAleatorio,
+                width: 128,
+                height: 128
+            });
+        }
+        
+        // Función para generar un enlace aleatorio único
+        function generarEnlaceAleatorio() {
+            var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var enlace = '';
+            for (var i = 0; i < 10; i++) { // Puedes ajustar la longitud del enlace
+                var indice = Math.floor(Math.random() * caracteres.length);
+                enlace += caracteres.charAt(indice);
+            }
+            return enlace;
+        }
+    </script>
+</body>
+</html>
